@@ -446,7 +446,7 @@
 		}
 	],
 	"outputs": {
-		"sofsName": {
+		"fsName": {
 			"type": "string",
 			"value": "[parameters('fsName')]"
 		},
