@@ -225,8 +225,8 @@
 							"id": "[variables('lbProbeId')]"
 						},
 						"protocol": "Tcp",
-						"frontendPort": 443,
-						"backendPort": 443,
+						"frontendPort": 139,
+						"backendPort": 139,
 						"enableFloatingIP": false
 						}
 					},
@@ -255,8 +255,8 @@
 						"properties": {
 							"protocol": "Tcp",
 							"port": 59999,
-							"intervalInSeconds": 31,
-							"numberOfProbes": 10
+							"intervalInSeconds": 5,
+							"numberOfProbes": 2
 						}
 					}
 				]

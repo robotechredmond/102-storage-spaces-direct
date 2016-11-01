@@ -130,19 +130,24 @@ configuration ConfigS2D
 
         Script EnableS2D
         {
-            SetScript = "Enable-ClusterS2D -Confirm:0; New-Volume -StoragePoolFriendlyName S2D* -FriendlyName VDisk01 -FileSystem CSVFS_REFS -UseMaximumSize"
+            SetScript = "Enable-ClusterS2D -Confirm:0"
             TestScript = "(Get-ClusterSharedVolume).State -eq 'Online'"
             GetScript = "@{Ensure = if ((Get-ClusterSharedVolume).State -eq 'Online') {'Present'} Else {'Absent'}}"
             DependsOn = "[Script]IncreaseClusterTimeouts"
         }
 
-#        Script CreateShare
-#        {
-#            SetScript = "New-Item -Path C:\ClusterStorage\Volume1\${ShareName} -ItemType Directory; New-SmbShare -Name ${ShareName} -Path C:\ClusterStorage\Volume1\${ShareName} -FullAccess ${DomainName}\$($AdminCreds.Username)"
-#            TestScript = "(Get-SmbShare -Name ${ShareName} -ErrorAction SilentlyContinue).ShareState -eq 'Online'"
-#            GetScript = "@{Ensure = if ((Get-SmbShare -Name ${ShareName} -ErrorAction SilentlyContinue).ShareState -eq 'Online') {'Present'} Else {'Absent'}}"
-#            DependsOn = "[xSOFS]EnableSOFS"
-#        }
+        xFSRole EnableFSRole
+        {
+
+        }
+        
+        Script CreateShare
+        {
+            SetScript = "New-Item -Path F:\${ShareName} -ItemType Directory; New-SmbShare -Name ${ShareName} -Path F:\${ShareName} -FullAccess ${DomainName}\$($AdminCreds.Username)"
+            TestScript = "(Get-SmbShare -Name ${ShareName} -ErrorAction SilentlyContinue).ShareState -eq 'Online'"
+            GetScript = "@{Ensure = if ((Get-SmbShare -Name ${ShareName} -ErrorAction SilentlyContinue).ShareState -eq 'Online') {'Present'} Else {'Absent'}}"
+            DependsOn = "[xFSRole]EnableFSRole"
+        }
 
         LocalConfigurationManager 
         {
