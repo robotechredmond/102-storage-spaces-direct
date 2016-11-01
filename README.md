@@ -21,6 +21,8 @@ Click the button below to deploy from the portal:
 
 ## Notes
 
++   Certain IW File Server role features, such as DFS-N, DFS-R and FSRM, are not supported with Storage Spaces Direct (S2D). Do not attempt to use these features with this template deployment.
+
 +	The default settings for storage are to deploy using **premium storage**.  When using Premium Storage, be sure to select a VM size (DS-series, GS-series) that supports Premium Storage.
 
 +   The default settings deploy 2 data disks per storage node, but can be increased to up to 32 data disks per node.  When increasing # of data disks, be sure to select a VM size that can support the # of data disks you specify.
